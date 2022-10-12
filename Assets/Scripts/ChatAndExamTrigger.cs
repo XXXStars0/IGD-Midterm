@@ -13,10 +13,12 @@ public class ChatAndExamTrigger : MonoBehaviour
     private GameObject ItemHolderObject;
     //Bubbles
     public GameObject[] Bubbles;
+    public bool eventON;
 
     // Start is called before the first frame update
     void Start()
     {
+        eventON = false;
         ItemHolderObject = GameObject.Find("ItemHolder");
         raycastMask = LayerMask.GetMask(interactiveLayers);
         dir = 2;
@@ -76,6 +78,7 @@ public class ChatAndExamTrigger : MonoBehaviour
         //Bubbles
         if (CommuInfo)
         {
+            eventON = true;
             //Pick
             if (CommuInfo.collider.gameObject.GetComponent<PickableObject>() && CommuInfo.collider.gameObject.GetComponent<PickableObject>().isActiveAndEnabled && ItemHolderObject.GetComponent<ItemHolder>().itemID == 0)
             {
@@ -152,7 +155,8 @@ public class ChatAndExamTrigger : MonoBehaviour
         }
         else
         {
-            foreach(GameObject obj in Bubbles)
+            eventON = false;
+            foreach (GameObject obj in Bubbles)
             {
                 obj.SetActive(false); 
             }

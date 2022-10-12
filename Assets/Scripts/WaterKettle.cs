@@ -21,7 +21,6 @@ public class WaterKettle : MonoBehaviour
         if (GameObject.Find("ItemHolder").GetComponent<ItemHolder>().itemID == 3 && (clickTrigger || (touchTrigger && isTouchTrigger)))
         {
             closeTruggers();
-            Debug.Log(GameObject.Find("SE_WaterPour"));
             GameObject.Find("SE_WaterPour").GetComponent<AudioSource>().Play();
             GameObject.Find("Player").GetComponent<PlayerController>().canWalk = false;
             a = true;

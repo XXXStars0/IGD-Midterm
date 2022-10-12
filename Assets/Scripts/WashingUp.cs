@@ -14,8 +14,6 @@ public class WashingUp : MonoBehaviour
     {
         isCleaned = false;
         isTouchTrigger = this.GetComponent<InteractiveTrigger>().isTouchTrigger;
-        GameObject.Find("WantWash").GetComponent<SpriteRenderer>().enabled = true;
-        GameObject.Find("NeedBread").GetComponent<SpriteRenderer>().enabled=false;
     }
 
     // Update is called once per frame
@@ -39,7 +37,7 @@ public class WashingUp : MonoBehaviour
         GameObject.Find("WantWash").GetComponent<SpriteRenderer>().enabled = false;
         yield return new WaitForSeconds(18f);
         GameObject.Find("Player").GetComponent<PlayerController>().canWalk = true;
-        GameObject.Find("NeedBread").GetComponent<SpriteRenderer>().enabled = true;
+
         isCleaned = true;
         GameObject.Find("SE_Get").GetComponent<AudioSource>().Play();
 

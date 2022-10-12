@@ -12,14 +12,19 @@ public class ItemHolder : MonoBehaviour
     private AudioSource SE_Throw;
     private AudioSource SE_Get;
     public int toastCount=0;
+    SpriteRenderer K;
 
     // Start is called before the first frame update
     void Start()
     {
+        GameObject.Find("NeedBread").GetComponent<SpriteRenderer>().enabled = false;
+        GameObject.Find("WantWash").GetComponent<SpriteRenderer>().enabled = false;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         SE_Unuseable = GameObject.Find("SE_Cancel").GetComponent<AudioSource>();
         SE_Throw = GameObject.Find("SE_Throw").GetComponent<AudioSource>();
         SE_Get = GameObject.Find("SE_Get").GetComponent<AudioSource>();
+        K = GameObject.Find("K").GetComponent<SpriteRenderer>();
+        K.enabled = false ;
     }
 
     // Update is called once per frame
@@ -28,6 +33,15 @@ public class ItemHolder : MonoBehaviour
         //Draw current Item
         spriteRenderer.sprite = spriteArray[itemID];
         //Use current Item
+        if(itemID==6 || itemID == 11 || itemID == 16 || itemID == 24 || itemID == 27)
+        {
+            K.enabled = true;
+        }
+        else
+        {
+            K.enabled = false;
+        }
+
         if (Input.GetButtonDown("Fire2"))
         {
             switch (itemID)
@@ -46,6 +60,9 @@ public class ItemHolder : MonoBehaviour
                     SE_Get.Play();
                     GameObject.Find("PhoneAlarmClock").GetComponent<Alarm_Check>().isAlarming = false;
                     break;
+                case 23:
+                    GameObject.Find("NeedBread").GetComponent<SpriteRenderer>().enabled = true;
+                    break;
                 case 24:
                     if (GameObject.Find("Washer").GetComponent<WashingUp>().isCleaned) {
                         GameObject.Find("NeedBread").GetComponent<SpriteRenderer>().enabled = false;
@@ -54,6 +71,7 @@ public class ItemHolder : MonoBehaviour
                     }
                     else
                     {
+                        GameObject.Find("WantWash").GetComponent<SpriteRenderer>().enabled = true;
                         SE_Unuseable.Play();
                     }
                     break;
@@ -63,6 +81,7 @@ public class ItemHolder : MonoBehaviour
                     break;
                 default:
                     //Unuseable or no items
+
                     SE_Unuseable.Play();
                     break;
             }
@@ -74,10 +93,10 @@ public class ItemHolder : MonoBehaviour
             SE_Get.Play();
             GameObject.Find("Player").GetComponent<PlayerController>().canWalk = true;
             itemID = 0;
-            if (toastCount < 2) { GameObject.Find("NeedBread").GetComponent<SpriteRenderer>().enabled = true; }
+            //if (toastCount < 2) { GameObject.Find("NeedBread").GetComponent<SpriteRenderer>().enabled = true; }
         }
         //Throw Item
-        if (Input.GetButtonDown("Fire3"))
+        if (Input.GetButtonDown("Fire1") && !GameObject.Find("ChatAndExamTrigger").GetComponent<ChatAndExamTrigger>().eventON )
         {
             bool throwable = false;
             float pos_X = GameObject.Find("Player").GetComponent<Transform>().position.x;
@@ -142,10 +161,14 @@ public class ItemHolder : MonoBehaviour
                     throwable = true;
                     break;
                 case 23:
+                    GameObject.Find("NeedBread").GetComponent<SpriteRenderer>().enabled = false;
                     currItem = throwables[13];
                     throwable = true;
                     break;
                 case 24:
+                    if (GameObject.Find("WantWash").GetComponent<SpriteRenderer>().enabled) {
+                        GameObject.Find("WantWash").GetComponent<SpriteRenderer>().enabled = false;
+                    }
                     currItem = throwables[14];
                     throwable = true;
                     break;
