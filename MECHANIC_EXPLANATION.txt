@@ -1,0 +1,21 @@
+Mechanics:
+
+-Moving:
+
+Using WASD or arrow keys for moving around just like many top-down sight 2D games. 
+
+-Interaction:
+
+Indicator bubble and which button should be pressed would appear on the player's head. It is possible to wash, open the door, toasting and pouring water. Also possible to put the current holding item to a specific container.
+
+-Item:
+
+Using J to pick or throw current items and K to use them or change their conditions. Turning off the alarm, feeding the V-pet, turning off the computer and so on.
+
+-Toaster:
+
+Should wait for a time to cook bread, just like a real toaster. At this time, players could manage their time with something else.
+
+-Task finish check:
+
+Before finishing all the tasks, a “X” bubble would display when the player tried to reach the door.
